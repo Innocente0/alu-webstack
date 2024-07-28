@@ -33,19 +33,19 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend  elissa-frontend-http
+frontend  innocente-frontend-http
         bind *:80
         mode http
 	http-request redirect scheme https code 301 unless { ssl_fc }
 	http-request set-header X-Forwarded-Proto http
-        default_backend elissa-backend
+        default_backend innocente-backend
 
-frontend elissa-frontend-https
+frontend innocente-frontend-https
 	bind *:443 ssl crt /etc/haproxy/certs/www.twizelissa.tech.pem
 	http-request set-header X-Forwarded-Proto https
-	default_backend elissa-backend
+	default_backend innocente-backend
 
-backend elissa-backend
+backend innocente-backend
         balance roundrobin
-        server 6119-web-01 18.212.244.16:80 check
-        server 6119-web-02 18.212.250.251:80 check
+        server 6226-web-01 18.212.92.6:80 check
+        server 6226-web-02 3.88.3.109:80 check
